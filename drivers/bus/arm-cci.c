@@ -295,7 +295,7 @@ EXPORT_SYMBOL_GPL(cci_disable_port_by_cpu);
  * any failure this never returns as the inability to enable the CCI is
  * fatal and there is no possible recovery at this stage.
  */
-asmlinkage void __naked cci_enable_port_for_self(void)
+__attribute__((naked)) asmlinkage void cci_enable_port_for_self(void)
 {
 	asm volatile ("\n"
 "	.arch armv7-a\n"

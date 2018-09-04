@@ -240,7 +240,8 @@ static int tests_failed;
 
 long arm_func(long r0, long r1);
 
-static void __used __naked __arm_kprobes_test_func(void)
+__attribute__((naked))
+static void __used __arm_kprobes_test_func(void)
 {
 	__asm__ __volatile__ (
 		".arm					\n\t"
@@ -261,7 +262,8 @@ long thumb16_func(long r0, long r1);
 long thumb32even_func(long r0, long r1);
 long thumb32odd_func(long r0, long r1);
 
-static void __used __naked __thumb_kprobes_test_funcs(void)
+__attribute__((naked))
+static void __used __thumb_kprobes_test_funcs(void)
 {
 	__asm__ __volatile__ (
 		".type thumb16_func, %%function		\n\t"
@@ -438,7 +440,8 @@ static int run_api_tests(long (*func)(long, long))
 
 #if BENCHMARKING
 
-static void __naked benchmark_nop(void)
+__attribute__((naked))
+static void benchmark_nop(void)
 {
 	__asm__ __volatile__ (
 		"nop		\n\t"
@@ -452,7 +455,8 @@ static void __naked benchmark_nop(void)
 #define wide
 #endif
 
-static void __naked benchmark_pushpop1(void)
+__attribute__((naked))
+static void benchmark_pushpop1(void)
 {
 	__asm__ __volatile__ (
 		"stmdb"wide"	sp!, {r3-r11,lr}  \n\t"
@@ -460,7 +464,8 @@ static void __naked benchmark_pushpop1(void)
 	);
 }
 
-static void __naked benchmark_pushpop2(void)
+__attribute__((naked))
+static void benchmark_pushpop2(void)
 {
 	__asm__ __volatile__ (
 		"stmdb"wide"	sp!, {r0-r8,lr}  \n\t"
@@ -468,7 +473,8 @@ static void __naked benchmark_pushpop2(void)
 	);
 }
 
-static void __naked benchmark_pushpop3(void)
+__attribute__((naked))
+static void benchmark_pushpop3(void)
 {
 	__asm__ __volatile__ (
 		"stmdb"wide"	sp!, {r4,lr}  \n\t"
@@ -476,7 +482,8 @@ static void __naked benchmark_pushpop3(void)
 	);
 }
 
-static void __naked benchmark_pushpop4(void)
+__attribute__((naked))
+static void benchmark_pushpop4(void)
 {
 	__asm__ __volatile__ (
 		"stmdb"wide"	sp!, {r0,lr}  \n\t"
@@ -487,7 +494,8 @@ static void __naked benchmark_pushpop4(void)
 
 #ifdef CONFIG_THUMB2_KERNEL
 
-static void __naked benchmark_pushpop_thumb(void)
+__attribute__((naked))
+static void benchmark_pushpop_thumb(void)
 {
 	__asm__ __volatile__ (
 		"push.n	{r0-r7,lr}  \n\t"
@@ -918,7 +926,8 @@ static void coverage_end(void)
  * Framework for instruction set test cases
  */
 
-void __naked __kprobes_test_case_start(void)
+__attribute__((naked))
+void __kprobes_test_case_start(void)
 {
 	__asm__ __volatile__ (
 		"mov	r2, sp					\n\t"
@@ -935,7 +944,8 @@ void __naked __kprobes_test_case_start(void)
 
 #ifndef CONFIG_THUMB2_KERNEL
 
-void __naked __kprobes_test_case_end_32(void)
+__attribute__((naked))
+void __kprobes_test_case_end_32(void)
 {
 	__asm__ __volatile__ (
 		"mov	r4, lr					\n\t"
@@ -952,7 +962,8 @@ void __naked __kprobes_test_case_end_32(void)
 
 #else /* CONFIG_THUMB2_KERNEL */
 
-void __naked __kprobes_test_case_end_16(void)
+__attribute__((naked))
+void __kprobes_test_case_end_16(void)
 {
 	__asm__ __volatile__ (
 		"mov	r4, lr					\n\t"
@@ -967,7 +978,8 @@ void __naked __kprobes_test_case_end_16(void)
 	);
 }
 
-void __naked __kprobes_test_case_end_32(void)
+__attribute__((naked))
+void __kprobes_test_case_end_32(void)
 {
 	__asm__ __volatile__ (
 		".arm						\n\t"

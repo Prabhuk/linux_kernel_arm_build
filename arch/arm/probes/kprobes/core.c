@@ -402,7 +402,8 @@ int __kprobes kprobe_exceptions_notify(struct notifier_block *self,
  * for kretprobe handlers which should normally be interested in r0 only
  * anyway.
  */
-void __naked __kprobes kretprobe_trampoline(void)
+__attribute__((naked))
+void __kprobes kretprobe_trampoline(void)
 {
 	__asm__ __volatile__ (
 		"stmdb	sp!, {r0 - r11}		\n\t"

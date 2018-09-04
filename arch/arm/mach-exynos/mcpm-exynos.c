@@ -190,7 +190,8 @@ static const struct mcpm_platform_ops exynos_power_ops = {
 /*
  * Enable cluster-level coherency, in preparation for turning on the MMU.
  */
-static void __naked exynos_pm_power_up_setup(unsigned int affinity_level)
+__attribute__((naked))
+static void exynos_pm_power_up_setup(unsigned int affinity_level)
 {
 	asm volatile ("\n"
 	"cmp	r0, #1\n"

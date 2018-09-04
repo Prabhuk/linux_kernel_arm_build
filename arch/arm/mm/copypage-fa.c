@@ -17,7 +17,8 @@
 /*
  * Faraday optimised copy_user_page
  */
-static void __naked
+__attribute__((naked))
+static void 
 fa_copy_user_page(void *kto, const void *kfrom)
 {
 	asm("\

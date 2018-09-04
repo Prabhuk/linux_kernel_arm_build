@@ -194,7 +194,8 @@ static const struct mcpm_platform_ops tc2_pm_power_ops = {
 /*
  * Enable cluster-level coherency, in preparation for turning on the MMU.
  */
-static void __naked tc2_pm_power_up_setup(unsigned int affinity_level)
+__attribute__((naked))
+static void tc2_pm_power_up_setup(unsigned int affinity_level)
 {
 	asm volatile (" \n"
 "	cmp	r0, #1 \n"

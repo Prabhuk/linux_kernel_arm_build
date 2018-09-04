@@ -20,7 +20,8 @@
  * dirty data in the cache.  However, we do have to ensure that
  * subsequent reads are up to date.
  */
-static void __naked
+__attribute__((naked))
+static void 
 v4wt_copy_user_page(void *kto, const void *kfrom)
 {
 	asm("\
