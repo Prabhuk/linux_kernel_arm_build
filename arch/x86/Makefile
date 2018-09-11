@@ -176,7 +176,7 @@ ifdef CONFIG_FUNCTION_GRAPH_TRACER
 endif
 
 ifndef CC_HAVE_ASM_GOTO
-  $(error Compiler lacks asm-goto support.)
+  $(warning Compiler lacks asm-goto support.)
 endif
 
 #
