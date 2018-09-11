@@ -28,6 +28,7 @@
 #include <linux/libps2.h>
 #include <linux/mutex.h>
 #include <linux/dmi.h>
+#include <stdchecked.h>
 
 #define DRIVER_DESC	"AT and PS/2 keyboard driver"
 
@@ -914,6 +915,11 @@ static void atkbd_disconnect(struct serio *serio)
 	kfree(atkbd);
 }
 
+_Itype_for_any(T) static void *testing_checked_code(void *input1 : itype(_Ptr<T>), 
+							void *input2 : itype(_Ptr<T>)) : itype(_Ptr<T>) {
+	return input1;
+}
+
 /*
  * generate release events for the keycodes given in data
  */
@@ -922,6 +928,12 @@ static void atkbd_apply_forced_release_keylist(struct atkbd* atkbd,
 {
 	const unsigned int *keys = data;
 	unsigned int i;
+
+	int test = 10;
+	_Ptr<int> p1 = &test;
+	_Checked {
+		p1 = testing_checked_code<int>(p1, p1);
+	}
 
 	if (atkbd->set == 2)
 		for (i = 0; keys[i] != -1U; i++)
